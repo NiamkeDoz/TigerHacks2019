@@ -1,18 +1,36 @@
 // defines pins numbers
 const int trigPin = 10;
 const int echoPin = 9;
+int green = 13;
+int red = 7;
 
 // defines variables
 long duration;
 int distance;
+long randNumber;
 
 void setup() {
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+  pinMode(green, OUTPUT);
+  pinMode(red, OUTPUT);
   Serial.begin(9600); // Starts the serial communication
 }
 
 void loop() {
+  randNumber = random(2);
+  if(randNumber == 0){
+    digitalWrite(red, HIGH);
+  }else{
+    digitalWrite(green, HIGH);
+  }
+  sensor();
+  delay(250);
+  digitalWrite(red, LOW);
+  digitalWrite(green, LOW);
+}
+
+void sensor(){
   // Clears the trigPin
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
